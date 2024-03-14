@@ -1,0 +1,81 @@
+<Project>
+
+	<PropertyGroup>
+		<VersionMajor>1</VersionMajor>
+		<VersionMinor>0</VersionMinor>
+		<VersionPatch>0</VersionPatch>
+		<VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch)</VersionPrefix>
+		<VersionSuffix Condition="$(Configuration.Equals('Debug'))">Development</VersionSuffix>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<AnalysisMode>recommended</AnalysisMode>
+		<AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+		<AssemblyOriginatorKeyFile>..\..\PublicKey.snk</AssemblyOriginatorKeyFile>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+		<DebugType>full</DebugType>
+		<Deterministic>true</Deterministic>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<EnablePackageValidation>true</EnablePackageValidation>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratedAssemblyInfoFile>Properties\AssemblyInfo.cs</GeneratedAssemblyInfoFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<Nullable>enable</Nullable>
+		<SignAssembly>true</SignAssembly>
+		<TargetFrameworks>netstandard2.0;net462;net6.0;net8.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
+		<Author>BoBoBaSs84</Author>
+		<Authors>$(Author)</Authors>
+		<Company>https://github.com/$(Author)</Company>
+		<Copyright>Copyright © $([System.DateTime]::UtcNow.Year) $(Author)</Copyright>
+		<Description>A unique file format ...</Description>
+		<PackageIcon>$(AssemblyName).png</PackageIcon>
+		<PackageId>$(AssemblyName)</PackageId>
+		<PackageTags>library;csharp;file;format</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/BoBoBaSs84/BB84.FileFormat</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<Product>$(AssemblyName)</Product>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/BoBoBaSs84/BB84.FileFormat</RepositoryUrl>
+		<Title>$(AssemblyName)</Title>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
+		<IsPackable>false</IsPackable>
+		<IsTestProject>true</IsTestProject>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+		<TargetFrameworks>net462;net6.0;net8.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup Condition="!$(MSBuildProjectName.EndsWith('Tests'))">
+		<InternalsVisibleTo Include="$(AssemblyName).Tests" Key="00240000048000009400000006020000002400005253413100040000010001002176605e20c9cf4f5b8036c6aa2c4ae82a7e3f0435f389dc56b590a2f12fbb17a1f5ca30abe3dbab44e11b0e92ba24096b599d2a781a1ccbd4d04f427ae325989b9cc4d4311453d0ffd2ca1be157152b0995cd2edd9db5ef993cd49368f1beb2433d6761ece3c16a5d7a291c07a8813b9e79d8afc1f6ce4122fc4b744c39fdda" />
+		<None Include="..\..\LICENSE" Pack="True" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="True" PackagePath="\" />
+		<None Include="..\..\$(AssemblyName).png" Pack="True" PackagePath="\"/>
+	</ItemGroup>
+
+	<ItemGroup Condition="$(MSBuildProjectName.EndsWith('Tests'))">
+		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+		<Using Include="System.Diagnostics" />
+		<Using Include="System.Diagnostics.CodeAnalysis" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Properties\" />
+	</ItemGroup>
+
+</Project>
